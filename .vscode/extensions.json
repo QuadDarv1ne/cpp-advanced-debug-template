@@ -1,0 +1,17 @@
+{
+    "recommendations": [
+        "ms-vscode.cpptools",
+        "webfreak.debug",
+        "visualstudioexptteam.vscodeintellicode",
+        "ms-vscode.cmake-tools",
+        "matepek.vscode-catch2-test-adapter",
+        "twxs.cmake",
+        "danielpinto8zz6.c-cpp-compile-run",
+        "jeff-hykin.better-cpp-syntax",
+        "austin.code-gnu-global",
+        "cschlosser.doxdocgen",
+        "xaver.clang-format",
+        "ms-vscode.hexeditor",
+        "grennis.vscode-ssa"
+    ]
+}

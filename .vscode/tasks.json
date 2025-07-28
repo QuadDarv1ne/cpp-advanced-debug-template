@@ -1,0 +1,102 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build with MinGW",
+            "type": "shell",
+            "command": "${config:cpp.compilerPath}",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-O0",
+                "-Wall",
+                "-Wextra",
+                "-Wpedantic",
+                "-fno-omit-frame-pointer",
+                "-fexec-charset=UTF-8",
+                "-finput-charset=UTF-8",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.exe"
+            ],
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "options": {
+                "env": {
+                    "PATH": "${config:cpp.mingwPath};${env:PATH}"
+                }
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": false
+            }
+        },
+        {
+            "label": "Build All",
+            "dependsOn": ["Build with MinGW"],
+            "group": "build"
+        },
+        {
+            "label": "Run GDB Server",
+            "type": "shell",
+            "command": "gdbserver",
+            "args": [
+                "localhost:${input:port}",
+                "${fileDirname}/${fileBasenameNoExtension}.exe"
+            ],
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "pattern": [
+                        {
+                            "regexp": ".",
+                            "file": 1,
+                            "location": 2,
+                            "message": 3
+                        }
+                    ],
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": "Process .* created",
+                        "endsPattern": "Process .* exited"
+                    }
+                }
+            ]
+        },
+        {
+            "label": "Post-Debug Cleanup",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-f",
+                "${fileDirname}/*.o",
+                "${fileDirname}/*.d"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Generate Assembly",
+            "type": "shell",
+            "command": "${config:cpp.compilerPath}",
+            "args": [
+                "-S",
+                "-fverbose-asm",
+                "-masm=intel",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.asm"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "port",
+            "type": "promptString",
+            "description": "Enter GDB server port",
+            "default": "1234"
+        }
+    ]
+}

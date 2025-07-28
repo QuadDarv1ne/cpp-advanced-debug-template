@@ -1,0 +1,32 @@
+{
+    "cpp.gdbPath": "gdb.exe",
+    "cpp.compilerPath": "g++.exe",
+    "cpp.mingwPath": "C:/mingw64/bin",
+    
+    "debug.allowBreakpointsEverywhere": true,
+    "debug.showBreakpointsInOverviewRuler": true,
+    "debug.openDebug": "openOnSessionStart",
+    "debug.inlineValues": true,
+    
+    "gdb.additionalCommands": [
+        "set print elements unlimited",
+        "set print pretty on"
+    ],
+    
+    "gdb.showDevDebugOutput": true,
+    "gdb.enablePrettyPrinting": true,
+    "gdb.displayNaturalStrings": true,
+    
+    "C_Cpp.default.gdbPath": "${config:cpp.gdbPath}",
+    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+    
+    "terminal.integrated.env.windows": {
+        "PATH": "C:/mingw64/bin;${env:PATH}",
+        "GDB_USE_COLOR": "1"
+    },
+    
+    "files.associations": {
+        "*.gdb": "gdb",
+        "*.asm": "asm"
+    }
+}

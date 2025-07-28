@@ -1,0 +1,72 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "GDB Advanced Debugging",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [
+                {
+                    "name": "LANG",
+                    "value": "C.UTF-8"
+                }
+            ],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${config:cpp.gdbPath}",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set charset to UTF-8",
+                    "text": "set charset UTF-8",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set disassembly flavor",
+                    "text": "set disassembly-flavor intel",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Load .gdbinit",
+                    "text": "source -v ${workspaceFolder}/.gdbinit",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build with MinGW",
+            "postDebugTask": "Post-Debug Cleanup",
+            "logging": {
+                "engineLogging": true,
+                "trace": true,
+                "traceResponse": true
+            },
+            "visualizerFile": "${workspaceFolder}/.natvis",
+            "showDisplayString": true,
+            "customLaunchSetupCommands": [
+                {
+                    "text": "handle SIGINT nostop noprint pass"
+                }
+            ],
+            "debugServerPath": "gdbserver",
+            "debugServerArgs": ":${debugPort}",
+            "serverStarted": "Listening on port .+",
+            "filterStderr": true,
+            "coreDumpPath": "${workspaceFolder}/core.dump",
+            "symbolSearchPath": "${workspaceFolder}/symbols"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Multi-File Debug",
+            "configurations": ["GDB Advanced Debugging"],
+            "preLaunchTask": "Build All"
+        }
+    ]
+}

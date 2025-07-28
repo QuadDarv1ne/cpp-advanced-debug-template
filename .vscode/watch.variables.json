@@ -1,0 +1,17 @@
+{
+    "watchExpressions": [
+        {
+            "name": "this",
+            "expression": "this"
+        },
+        {
+            "name": "STL Containers",
+            "expression": "std::vector"
+        },
+        {
+            "name": "Memory View",
+            "expression": "(char[100])*($esp)",
+            "format": "hex"
+        }
+    ]
+}
